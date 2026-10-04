@@ -16,5 +16,15 @@ services:
       timeout: 5s
       retries: 30
 
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://je_risk:je_risk@db:5432/je_risk
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
 volumes:
   pgdata:
