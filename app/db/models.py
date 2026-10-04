@@ -126,13 +126,22 @@ class RuleHitRecord(Base):
     reason: Mapped[str] = mapped_column(Text)
 
 
-# The main screen of the API: a run's entries, filtered by level, highest score first.
+# A run's entries filtered by level, highest score first, and the counts per level.
 # The columns and directions match the ORDER BY (risk_score DESC, entry_id, id),
 # so PostgreSQL can read rows already in order instead of sorting them.
 Index(
     "ix_journal_entries_run_level_score",
     JournalEntryRecord.run_id,
     JournalEntryRecord.risk_level,
+    JournalEntryRecord.risk_score.desc(),
+    JournalEntryRecord.entry_id,
+    JournalEntryRecord.id,
+)
+# The default list (no level filter), highest score first. The index above cannot serve it,
+# because risk_level comes before risk_score; see docs/benchmarks.md.
+Index(
+    "ix_journal_entries_run_score",
+    JournalEntryRecord.run_id,
     JournalEntryRecord.risk_score.desc(),
     JournalEntryRecord.entry_id,
     JournalEntryRecord.id,
