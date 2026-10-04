@@ -1,0 +1,31 @@
+entry_id,line_number,posting_date,created_at,source,description,prepared_by,approved_by,currency,account_number,debit,credit,department,vendor
+JE000001,1,2026-03-31,2026-03-31 10:00:00,MANUAL,Q1 consulting accrual - Northwind SOW 12,gl_acct1,gl_manager,USD,610100,40000.00,,Finance,Northwind Advisory
+JE000001,2,2026-03-31,2026-03-31 10:00:00,MANUAL,Q1 consulting accrual - Northwind SOW 12,gl_acct1,gl_manager,USD,210100,,40000.00,Finance,Northwind Advisory
+JE000002,1,2026-06-30,2026-06-30 02:15:00,SYSTEM,Payroll June 2026,SYS_PAYROLL,,USD,620100,250000.00,,Finance,
+JE000002,2,2026-06-30,2026-06-30 02:15:00,SYSTEM,Payroll June 2026,SYS_PAYROLL,,USD,100100,,212500.00,Finance,
+JE000002,3,2026-06-30,2026-06-30 02:15:00,SYSTEM,Payroll June 2026,SYS_PAYROLL,,USD,220100,,37500.00,Finance,
+JE000003,1,2026-06-30,2026-06-30 03:05:00,SYSTEM,Depreciation June 2026,SYS_FA,,USD,630100,12500.00,,Operations,
+JE000003,2,2026-06-30,2026-06-30 03:05:00,SYSTEM,Depreciation June 2026,SYS_FA,,USD,150900,,12500.00,Operations,
+JE000004,1,2026-09-30,2026-09-30 14:20:00,MANUAL,Q3 consulting accrual - Northwind SOW 12,gl_acct1,gl_manager,USD,610100,42350.00,,Finance,Northwind Advisory
+JE000004,2,2026-09-30,2026-09-30 14:20:00,MANUAL,Q3 consulting accrual - Northwind SOW 12,gl_acct1,gl_manager,USD,210100,,42350.00,Finance,Northwind Advisory
+JE000005,1,2026-10-15,2026-10-15 10:30:00,MANUAL,"Customer invoice INV-8812, Contoso Ltd",gl_acct1,gl_manager,USD,110100,18240.00,,Sales,
+JE000005,2,2026-10-15,2026-10-15 10:30:00,MANUAL,"Customer invoice INV-8812, Contoso Ltd",gl_acct1,gl_manager,USD,400100,,18240.00,Sales,
+JE000006,1,2026-11-14,2026-11-14 11:05:00,MANUAL,Vendor payment ABC Consulting,gl_acct1,gl_manager,USD,200100,30000.00,,Finance,ABC Consulting
+JE000006,2,2026-11-14,2026-11-14 11:05:00,MANUAL,Vendor payment ABC Consulting,gl_acct1,gl_manager,USD,100100,,30000.00,Finance,ABC Consulting
+JE000007,1,2026-11-20,2026-11-20 16:40:00,MANUAL,Consulting fee - Fabrikam project,gl_acct1,,USD,610100,97500.00,,Finance,Fabrikam
+JE000007,2,2026-11-20,2026-11-20 16:40:00,MANUAL,Consulting fee - Fabrikam project,gl_acct1,,USD,200100,,97500.00,Finance,Fabrikam
+JE000008,1,2026-12-01,2026-12-01 11:00:00,MANUAL,"Customer invoice INV-9034, Contoso Ltd",gl_acct1,gl_manager,USD,110100,26410.00,,Sales,
+JE000008,2,2026-12-01,2026-12-01 11:00:00,MANUAL,"Customer invoice INV-9034, Contoso Ltd",gl_acct1,gl_manager,USD,400100,,26410.00,Sales,
+JE000009,1,2026-12-15,2026-12-15 09:10:00,MANUAL,Consulting fee - Q4 tax advisory,gl_acct1,GL_ACCT1,USD,610100,8600.00,,Finance,Northwind Advisory
+JE000009,2,2026-12-15,2026-12-15 09:10:00,MANUAL,Consulting fee - Q4 tax advisory,gl_acct1,GL_ACCT1,USD,200100,,8600.00,Finance,Northwind Advisory
+JE000010,1,2026-12-29,2026-12-29 15:00:00,MANUAL,Misc expense,ops_mgr,gl_manager,USD,690900,4750.00,,Operations,
+JE000010,2,2026-12-29,2026-12-29 15:00:00,MANUAL,Misc expense,ops_mgr,gl_manager,USD,100100,,4750.00,Operations,
+JE000011,1,2026-12-31,2026-12-31 01:30:00,SYSTEM,Payroll December 2026,SYS_PAYROLL,,USD,620100,260000.00,,Finance,
+JE000011,2,2026-12-31,2026-12-31 01:30:00,SYSTEM,Payroll December 2026,SYS_PAYROLL,,USD,100100,,221000.00,Finance,
+JE000011,3,2026-12-31,2026-12-31 01:30:00,SYSTEM,Payroll December 2026,SYS_PAYROLL,,USD,220100,,39000.00,Finance,
+JE000012,1,2026-12-31,2026-12-31 03:10:00,SYSTEM,Depreciation December 2026,SYS_FA,,USD,630100,12500.00,,Operations,
+JE000012,2,2026-12-31,2026-12-31 03:10:00,SYSTEM,Depreciation December 2026,SYS_FA,,USD,150900,,12500.00,Operations,
+JE000013,1,2026-12-31,2026-12-31 23:47:00,MANUAL,Year-end adjustment,controller01,,USD,610100,99800.00,,Finance,
+JE000013,2,2026-12-31,2026-12-31 23:47:00,MANUAL,Year-end adjustment,controller01,,USD,200100,,99800.00,Finance,
+JE000014,1,2026-12-30,2027-01-12 18:20:00,MANUAL,Revenue recognition - per CFO,gl_acct1,cfo,USD,110100,150000.00,,Sales,
+JE000014,2,2026-12-30,2027-01-12 18:20:00,MANUAL,Revenue recognition - per CFO,gl_acct1,cfo,USD,400100,,150000.00,Sales,
