@@ -1,0 +1,7 @@
+{
+  "fiscal_year_end": "2026-12-31",
+  "period_close_date": "2027-01-10",
+  "approval_threshold": "100000",
+  "min_account_usage": 2,
+  "min_preparer_entries": 2
+}

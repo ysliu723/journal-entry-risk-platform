@@ -3,8 +3,10 @@
 from datetime import date, datetime
 from decimal import Decimal
 
+from app.config import ClientConfig
 from app.domain.journal_entry import EntrySource, JournalEntry, JournalEntryLine
 from app.domain.trial_balance import AccountType, TrialBalanceLine
+from app.rules.base import PopulationStats, RuleContext
 
 
 def line(line_number, account_number, debit="0", credit="0", **kwargs) -> JournalEntryLine:
@@ -37,3 +39,15 @@ def tb_line(account_number, opening, closing, account_type=AccountType.EXPENSE) 
     return TrialBalanceLine(
         account_number, f"Account {account_number}", account_type, Decimal(opening), Decimal(closing)
     )
+
+
+def make_config(**overrides) -> ClientConfig:
+    """Calendar fiscal year 2026, books closed on 2027-01-10, default thresholds."""
+    fields = {"fiscal_year_end": date(2026, 12, 31), "period_close_date": date(2027, 1, 10)}
+    fields.update(overrides)
+    return ClientConfig(**fields)
+
+
+def make_context(entries=(), config=None) -> RuleContext:
+    """What a rule receives: the config plus statistics over `entries`."""
+    return RuleContext(config or make_config(), PopulationStats.from_entries(list(entries)))
