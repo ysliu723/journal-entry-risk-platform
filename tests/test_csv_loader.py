@@ -128,3 +128,11 @@ def test_missing_column_fails_the_whole_file(tmp_path):
     path = write_csv(tmp_path / "gl.csv", rows, columns)
     with pytest.raises(ValueError, match="missing columns: created_at"):
         load_gl_detail(path)
+
+
+def test_reads_files_saved_by_excel_with_a_byte_order_mark(tmp_path):
+    path = write_csv(tmp_path / "gl.csv", balanced_rows())
+    path.write_bytes(b"\xef\xbb\xbf" + path.read_bytes())  # what Excel's "CSV UTF-8" adds
+    result = load_gl_detail(path)
+    assert result.errors == []
+    assert len(result.entries) == 1

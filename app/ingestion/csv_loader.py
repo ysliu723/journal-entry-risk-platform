@@ -20,6 +20,9 @@ from typing import TextIO
 from app.domain.journal_entry import EntrySource, JournalEntry, JournalEntryLine
 from app.domain.trial_balance import AccountType, TrialBalanceLine
 
+# "utf-8-sig" also reads files saved by Excel, which start with a hidden byte-order mark.
+CSV_ENCODING = "utf-8-sig"
+
 TRIAL_BALANCE_COLUMNS = ("account_number", "account_name", "account_type", "opening_balance", "closing_balance")
 
 GL_DETAIL_COLUMNS = (
@@ -97,7 +100,7 @@ class _EntryGroup:
 
 
 def load_gl_detail(path: str | Path) -> LoadResult:
-    with open(path, newline="", encoding="utf-8") as file:
+    with open(path, newline="", encoding=CSV_ENCODING) as file:
         return read_gl_detail(file)
 
 
@@ -146,7 +149,7 @@ def _find_group(groups: list[_EntryGroup], header: _EntryHeader, line_number: in
 
 
 def load_trial_balance(path: str | Path) -> list[TrialBalanceLine]:
-    with open(path, newline="", encoding="utf-8") as file:
+    with open(path, newline="", encoding=CSV_ENCODING) as file:
         return read_trial_balance(file)
 
 

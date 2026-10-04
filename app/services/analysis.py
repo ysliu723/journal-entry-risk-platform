@@ -11,7 +11,7 @@ from typing import TextIO
 from app.config import ClientConfig
 from app.domain.trial_balance import TrialBalanceLine
 from app.engine.risk_engine import EntryRiskResult, RiskEngine
-from app.ingestion.csv_loader import LoadResult, read_gl_detail, read_trial_balance
+from app.ingestion.csv_loader import CSV_ENCODING, LoadResult, read_gl_detail, read_trial_balance
 from app.integrity.checks import IntegrityFinding, run_all_checks
 from app.rules import default_rules
 
@@ -40,6 +40,6 @@ def analyze(gl_file: TextIO, trial_balance_file: TextIO, config: ClientConfig) -
 
 
 def analyze_files(gl_path: str | Path, trial_balance_path: str | Path, config: ClientConfig) -> RunAnalysis:
-    with open(gl_path, newline="", encoding="utf-8") as gl_file:
-        with open(trial_balance_path, newline="", encoding="utf-8") as trial_balance_file:
+    with open(gl_path, newline="", encoding=CSV_ENCODING) as gl_file:
+        with open(trial_balance_path, newline="", encoding=CSV_ENCODING) as trial_balance_file:
             return analyze(gl_file, trial_balance_file, config)
