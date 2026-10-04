@@ -97,6 +97,10 @@ class JournalEntryRecord(Base):
     lines: Mapped[list["JournalEntryLineRecord"]] = relationship(order_by="JournalEntryLineRecord.line_number")
     hits: Mapped[list["RuleHitRecord"]] = relationship(order_by="RuleHitRecord.id")
 
+    @property
+    def rule_codes(self) -> list[str]:
+        return [hit.rule_code for hit in self.hits]
+
 
 class JournalEntryLineRecord(Base):
     __tablename__ = "journal_entry_lines"
@@ -123,14 +127,15 @@ class RuleHitRecord(Base):
 
 
 # The main screen of the API: a run's entries, filtered by level, highest score first.
-# risk_score is DESC and entry_id ASC in the index, matching the ORDER BY, so
-# PostgreSQL can read rows in order instead of sorting them.
+# The columns and directions match the ORDER BY (risk_score DESC, entry_id, id),
+# so PostgreSQL can read rows already in order instead of sorting them.
 Index(
     "ix_journal_entries_run_level_score",
     JournalEntryRecord.run_id,
     JournalEntryRecord.risk_level,
     JournalEntryRecord.risk_score.desc(),
     JournalEntryRecord.entry_id,
+    JournalEntryRecord.id,
 )
 # Looking up an entry number within a run.
 Index("ix_journal_entries_run_entry_id", JournalEntryRecord.run_id, JournalEntryRecord.entry_id)
