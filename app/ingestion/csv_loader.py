@@ -1,11 +1,11 @@
-"""Load a flat GL detail export from CSV.
+"""Load a flat GL detail export and a trial balance from CSV.
 
 A GL detail export has one row per journal entry line, with the header
 fields (dates, preparer, description, ...) repeated on every row. That is
 how most ERP systems export journal entries.
 
-Invalid rows are collected as LoadErrors instead of stopping at the first
-one, so one run reports every problem in the file. An entry with any
+Invalid GL rows are collected as LoadErrors instead of stopping at the
+first one, so one run reports every problem in the file. An entry with any
 invalid row is left out as a whole, never loaded half-complete.
 """
 
@@ -18,6 +18,9 @@ from pathlib import Path
 from typing import TextIO
 
 from app.domain.journal_entry import EntrySource, JournalEntry, JournalEntryLine
+from app.domain.trial_balance import AccountType, TrialBalanceLine
+
+TRIAL_BALANCE_COLUMNS = ("account_number", "account_name", "account_type", "opening_balance", "closing_balance")
 
 GL_DETAIL_COLUMNS = (
     "entry_id",
@@ -140,6 +143,41 @@ def _find_group(groups: list[_EntryGroup], header: _EntryHeader, line_number: in
         if group.accepts(header, line_number):
             return group
     return None
+
+
+def load_trial_balance(path: str | Path) -> list[TrialBalanceLine]:
+    with open(path, newline="", encoding="utf-8") as file:
+        return read_trial_balance(file)
+
+
+def read_trial_balance(file: TextIO) -> list[TrialBalanceLine]:
+    """Read a trial balance from an open text file.
+
+    Unlike the GL detail, any invalid row fails the whole file: the trial
+    balance is what the GL is reconciled to, so a partial one is useless.
+    """
+    lines = []
+    seen_accounts = set()
+    reader = csv.DictReader(file, restval="")
+    _require_columns(reader.fieldnames, TRIAL_BALANCE_COLUMNS)
+    for row in reader:
+        try:
+            tb_line = TrialBalanceLine(
+                account_number=_required(row["account_number"], "account_number"),
+                account_name=_required(row["account_name"], "account_name"),
+                account_type=_parse_enum(AccountType, row["account_type"], "account_type"),
+                opening_balance=_parse_amount(row["opening_balance"], "opening_balance"),
+                closing_balance=_parse_amount(row["closing_balance"], "closing_balance"),
+            )
+        except ValueError as exc:
+            raise ValueError(f"trial balance line {reader.line_num}: {exc}") from None
+        if tb_line.account_number in seen_accounts:
+            raise ValueError(
+                f"trial balance line {reader.line_num}: account {tb_line.account_number} appears twice"
+            )
+        seen_accounts.add(tb_line.account_number)
+        lines.append(tb_line)
+    return lines
 
 
 def _parse_gl_row(row: dict[str, str]) -> tuple[_EntryHeader, JournalEntryLine]:

@@ -4,6 +4,7 @@ from datetime import date, datetime
 from decimal import Decimal
 
 from app.domain.journal_entry import EntrySource, JournalEntry, JournalEntryLine
+from app.domain.trial_balance import AccountType, TrialBalanceLine
 
 
 def line(line_number, account_number, debit="0", credit="0", **kwargs) -> JournalEntryLine:
@@ -25,3 +26,14 @@ def make_entry(*lines, **overrides) -> JournalEntry:
     }
     fields.update(overrides)
     return JournalEntry(**fields)
+
+
+def entry_with_amount(amount, **overrides) -> JournalEntry:
+    """A two-line entry: debit 610100 (expense), credit 200100 (payables)."""
+    return make_entry(line(1, "610100", debit=amount), line(2, "200100", credit=amount), **overrides)
+
+
+def tb_line(account_number, opening, closing, account_type=AccountType.EXPENSE) -> TrialBalanceLine:
+    return TrialBalanceLine(
+        account_number, f"Account {account_number}", account_type, Decimal(opening), Decimal(closing)
+    )

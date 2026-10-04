@@ -1,0 +1,14 @@
+account_number,account_name,account_type,opening_balance,closing_balance
+100100,Cash - Operating,ASSET,1200000.00,731750.00
+110100,Accounts Receivable,ASSET,310000.00,504650.00
+150100,Fixed Assets,ASSET,600000.00,600000.00
+150900,Accumulated Depreciation,ASSET,-180000.00,-205000.00
+200100,Accounts Payable,LIABILITY,-240000.00,-415900.00
+210100,Accrued Liabilities,LIABILITY,-55000.00,-137350.00
+220100,Payroll Liabilities,LIABILITY,-45000.00,-121500.00
+300100,Retained Earnings,EQUITY,-1590000.00,-1590000.00
+400100,Product Revenue,REVENUE,0.00,-194650.00
+610100,Consulting Expense,EXPENSE,0.00,288250.00
+620100,Salaries Expense,EXPENSE,0.00,510000.00
+630100,Depreciation Expense,EXPENSE,0.00,25000.00
+690900,Miscellaneous Expense,EXPENSE,0.00,4750.00
