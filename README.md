@@ -8,8 +8,9 @@ configurable, explainable risk rules.
 
 ## Why
 
-Auditing standards (ISA 240, PCAOB AS 2401) require auditors to test journal
-entries for signs of management override of controls. A mid-size company posts
+Auditing standards require auditors to test journal entries for signs of
+management override of controls: PCAOB AS 2401 for public companies, AICPA
+AU-C 240 for private companies, and ISA 240 internationally. A mid-size company posts
 hundreds of thousands of entries a year, so testing means filtering. In practice
 the hard parts are:
 
@@ -27,9 +28,9 @@ This project is built around those three needs.
 - **Integrity checks before scoring.** Balanced entries, duplicate entry IDs,
   gaps in the entry number sequence, and a trial-balance rollforward
   (opening balance + GL activity = closing balance, for every account).
-- **11 risk rules** that map to fraud-risk characteristics of journal entries in
-  ISA 240 / AS 2401: timing, amounts, approvals, descriptions, and rules that
-  compare an entry with the whole population.
+- **11 risk rules** that map to the characteristics of potentially fraudulent
+  journal entries described in AS 2401 / AU-C 240: timing, amounts, approvals,
+  descriptions, and rules that compare an entry with the whole population.
 - **Ranked, explained results.** Each entry gets a score, a level
   (LOW / MEDIUM / HIGH), and the list of rules that fired with a reason for each.
 - **Reproducible runs.** Each upload is stored as an unchanging run together with
