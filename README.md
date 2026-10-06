@@ -6,6 +6,8 @@ configurable, explainable risk rules.
 
 **Python · FastAPI · PostgreSQL · SQLAlchemy · Docker · pytest**
 
+[![tests](https://github.com/ysliu723/journal-entry-risk-platform/actions/workflows/tests.yml/badge.svg)](https://github.com/ysliu723/journal-entry-risk-platform/actions/workflows/tests.yml)
+
 ## Why
 
 Auditing standards require auditors to test journal entries for signs of
@@ -93,6 +95,7 @@ pip install -r requirements-dev.txt
 
 docker compose up -d db          # PostgreSQL, with test and benchmark databases
 pytest                           # 141 tests; database tests are skipped if PostgreSQL is not running
+                                 # (GitHub Actions runs all of them against PostgreSQL on every push)
 
 # Command-line report, no database needed
 python -m app.cli data/sample/gl_detail.csv data/sample/trial_balance.csv \

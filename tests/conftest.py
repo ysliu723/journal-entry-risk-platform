@@ -1,7 +1,8 @@
 """Fixtures for tests that need PostgreSQL.
 
 Start the database first:  docker compose up -d db
-If it is not running, the tests that need it are skipped.
+If it is not running, the tests that need it are skipped, unless
+REQUIRE_DATABASE=1 is set (as in CI), where a missing database is an error.
 """
 
 import os
@@ -25,6 +26,8 @@ def db_engine():
         with engine.connect():
             pass
     except OperationalError:
+        if os.environ.get("REQUIRE_DATABASE") == "1":
+            raise  # in CI, skipped database tests would hide a broken setup
         pytest.skip("PostgreSQL is not running (start it with: docker compose up -d db)")
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
