@@ -25,6 +25,14 @@ the hard parts are:
 
 This project is built around those three needs.
 
+It is also the *detect* layer of three projects that work together:
+
+| Layer | Project | What it handles |
+|---|---|---|
+| Prevent | [Payments Ledger Service](https://github.com/ysliu723/payments-ledger-service) | What is always wrong, rejected at write time: unbalanced, duplicate, or self-approved entries |
+| **Detect** | **this project** | What is only sometimes wrong, ranked for review: late-night, round, near-threshold entries |
+| Verify | [Audit Evidence Agent](https://github.com/ysliu723/audit-evidence-agent) | What only the documents can tell: a look-alike vendor, a changed bank account |
+
 ## What it does
 
 - **Integrity checks before scoring.** Balanced entries, duplicate entry IDs,
